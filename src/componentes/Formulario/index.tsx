@@ -1,28 +1,35 @@
-import { useState } from 'react'
-import Botao from '../Botao'
-import CampoTexto from '../CampoTexto'
-import ListaSuspensa from '../ListaSuspensa'
-import './Formulario.css'
+import { useState } from 'react';
+import Botao from '../Botao';
+import CampoTexto from '../CampoTexto';
+import ListaSuspensa from '../ListaSuspensa';
+import './Formulario.css';
+import { IColaborador } from '../../compartilhado/interfaces/IColaborador';
 
-const Formulario = (props) => {
+interface FormularioProps {
+    aoColaboradorCadastrado: (colaborador: IColaborador) => void;
+    times: string[];  // = lista de strings
+}
 
-    const [nome, setNome] = useState('')
-    const [cargo, setCargo] = useState('')
-    const [imagem, setImagem] = useState('')
-    const [time, setTime] = useState('')
+const Formulario = (props: FormularioProps) => {
 
-    const aoSalvar = (evento) => {
-        evento.preventDefault()
+    const [nome, setNome] = useState('');
+    const [cargo, setCargo] = useState('');
+    const [imagem, setImagem] = useState('');
+    const [time, setTime] = useState('');
+
+    const aoSalvar = (evento: React.FormEvent<HTMLFormElement>) => {
+        evento.preventDefault();
         props.aoColaboradorCadastrado({
             nome,
             cargo,
             imagem,
             time
-        })
-        setNome('')
-        setCargo('')
-        setImagem('')
-        setTime('')
+        });
+
+        setNome('');
+        setCargo('');
+        setImagem('');
+        setTime('');
     }
 
     return (
@@ -64,4 +71,4 @@ const Formulario = (props) => {
     )
 }
 
-export default Formulario
+export default Formulario;
